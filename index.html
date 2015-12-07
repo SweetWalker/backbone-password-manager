@@ -3,32 +3,71 @@
 
   <head>
     <title>Password Manager</title>
-<!--     <link href="./assets/css/bootstrap.css" rel="stylesheet">
-    <link href="./assets/css/custom.css" rel="stylesheet">
-
-     -->
+    <link href="/js/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/build/one.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
-
-    <script data-main="js/main.js" src="js/vendor/requirejs/require.js"></script>
-    
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
   </head>
   <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Password Manager</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/#login">Login</a>
+                    </li>
+                    <li>
+                        <a href="/#passwords">Manage List</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    
+
     <div id="content">
     </div>
 
+
     <script type="text/template" id="login_template">
-      <form action="login" method="get" accept-charset="utf-8">
-        <input name="username" type="text"/>
-        <input name="password" type="password"/>
-        <input type="submit" value="Login"/>
+      <div class="logincont">
+      <form class="form-signin" action="login" method="get" accept-charset="utf-8">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Login</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="root" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="root" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+      </div>
       
 
     </script>
 
     <script type="text/template" id="passwords-template">
+      <div class="passtable">
       <thead>
-        <tr class='header'>
+        <tr class='hightlighted header'>
           <th>Name</th>
           <th>Password</th>
           <th></th>
@@ -36,8 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class='header addForm'>
-      
+        <tr class='hightlighted header addForm'>
             <td>
               <input type="text" name="name" placeholder="Name">
             </td>
@@ -46,12 +84,11 @@
             </td>
             <td></td>
             <td>
-                <input type="submit" class="submit" value="Add new">
-              </td>
-       
-      
+                <button type="submit" class="submit btn btn-success" value="Add new">Add</button>
+            </td>
         </tr>
       </tbody>
+      </div>
     </script>
 
     <script type="text/template" id="password-template">
@@ -61,7 +98,9 @@
       <td>
           <input type="checkbox" name="show" <% if (show) {%> checked="checked" <% } %>>
       </td>
-      <td><a href="#" class="disqualify">Disqualify</a></td>
+      <td><button type="button" class="disqualify btn btn-danger" value="">Delete</button></td>
     </script>
+
+    <script data-main="js/main.js" src="js/vendor/requirejs/require.js"></script>
   </body>
 </html>

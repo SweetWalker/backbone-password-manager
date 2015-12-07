@@ -22,11 +22,11 @@ require.config({
             deps: ['backbone']
         }
     },
-deps: ['jquery', 'underscore']
+deps: ['jquery', 'underscore', 'stickit']
 
     
 });
 
 require(['application/application'], function(AppView) {
-
+    AppView.start();
 });

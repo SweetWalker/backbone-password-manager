@@ -1,0 +1,25 @@
+{
+  "name": "password-manager",
+  "version": "1.0.0",
+  "description": "test spa for frontend position on nma by eugenue polischuk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SweetWalker/backbone-password-manager"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SweetWalker/backbone-password-manager/issues"
+  },
+  "homepage": "https://github.com/SweetWalker/backbone-password-manager",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.1.1",
+    "gulp-watch": "^4.3.5"
+  }
+}

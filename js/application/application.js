@@ -1,5 +1,7 @@
-define(['marionette'], function(Marionette){
-MyApp = new Backbone.Marionette.Application();
+define(['marionette', 'stickit', 'backbone'], function(Marionette, Stickit, Backbone){
+
+
+MyApp = new Marionette.Application();
 
 MyApp.addRegions({
   mainRegion: "#content"
@@ -17,12 +19,12 @@ Passwords = Backbone.Collection.extend({
   model: Password,
   
   initialize: function(){
-    
+
   }
 });
 
 
-BaseView = Backbone.Marionette.ItemView.extend({
+BaseView = Marionette.ItemView.extend({
   render: function() {
     Backbone.Marionette.ItemView.prototype.render.apply(this, arguments);
 
@@ -33,11 +35,11 @@ BaseView = Backbone.Marionette.ItemView.extend({
 PasswordView = BaseView.extend({
   template: "#password-template",
   tagName: 'tr',
-  className: 'password-item',
+  className: 'hightlighted password-item',
   
   events: {
     'click .show-hide': 'togglePassword',
-    'click a.disqualify': 'disqualify'
+    'click .disqualify': 'disqualify'
   },
   
   bindings: {
@@ -65,10 +67,10 @@ PasswordView = BaseView.extend({
   }
 });
 
-PasswordsView = Backbone.Marionette.CompositeView.extend({
+PasswordsView = Marionette.CompositeView.extend({
   tagName: "table",
   id: "passwords",
-  className: "table-striped table-bordered",
+  className: "",
   template: "#passwords-template",
   itemView: PasswordView,
   events: {
@@ -80,14 +82,14 @@ PasswordsView = Backbone.Marionette.CompositeView.extend({
   },
 
   addNewPassword: function(){
-    debugger;
+  	if(this.$el.find('.addForm [name=name]').val()!=="" && this.$el.find('.addForm [name=password]').val() !==""){
     var password = new Password({
       name: this.$el.find('.addForm [name=name]').val(),
       password: this.$el.find('.addForm [name=password]').val()
     });
 
     this.collection.add(password);
-   
+   }
   },
 
 });
@@ -101,7 +103,7 @@ LoginModel = Backbone.Model.extend({
   
   validate: function(){
     
-    if(this.get('username') === 'huehue' && this.get('password') === 'huehue'){
+    if(this.get('username') === 'root' && this.get('password') === 'root'){
       return true;
     }
 
@@ -113,7 +115,7 @@ LoginModel = Backbone.Model.extend({
 LoginView = BaseView.extend({
   tagName: "div",
   id: "login",
-  className: "table-striped table-bordered",
+  className: "",
   template: "#login_template",
   
   events: {
@@ -146,23 +148,19 @@ LoginView = BaseView.extend({
 
 var Controller = Marionette.Controller.extend({
         initialize : function(options) {
-             //TODO: code to initialize
          },
         
-        /**
-         * Initialized on start, without hash
-         * @method
-         */
+        
         passwords : function () {
       
           var passwords = new Passwords([
-              new Password({ name: 'Wet Cat', password: 'tetst' }),
-              new Password({ name: 'Bitey Cat', password: 'testest' }),
-              new Password({ name: 'Surprised Cat', password: 'qweqweqweqweqwe' })
+              new Password({ name: 'NASA', password: 'pewpew' }),
+              new Password({ name: 'Pentagon', password: 'qwerty' }),
+              new Password({ name: 'White House', password: '1234' })
           ]);
           passwords.add(new Password({
-            name: 'Cranky Cat',
-            password: 'qweqweqwe'
+            name: 'New Media Agency',
+            password: 'notapassword'
           }));
 
           var passwordView = new PasswordsView({
@@ -185,7 +183,6 @@ MyApp.addInitializer(function(options){
       "passwords": "passwords",
       "login": "login"
     },
-    /* standard routes can be mixed with appRoutes/Controllers above */
     routes : {
       "passwords": "passwords",
       "login": "login"
@@ -198,15 +195,14 @@ MyApp.addInitializer(function(options){
 
 
 
-MyApp.on("initialize:after", function(){
-  // Start Backbone history a necessary step for bookmarkable URL's
+MyApp.on("start", function(){
   Backbone.history.start();
 });
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-  MyApp.start();
+//   MyApp.start();
     
-});
-
+// });
+	return MyApp;
 })
